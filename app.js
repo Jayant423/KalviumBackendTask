@@ -33,12 +33,22 @@ function calculate(operations) {
         case 'modulo':
           operations[i] = "%";
         
-        break;
-        case 'power':
-          operations[i] = "**";
-          
           break;
-         
+        case 'power':
+          operations[i] = "^";
+          break;
+        case 'leftshift':
+          operations[i] = "<<";
+          break;
+        case 'rightshift':
+        operations[i] = ">>";
+        break;
+        case 'and':
+          operations[i] = "&";
+          break;
+        case 'or':
+          operations[i] = "|";
+          break;
     }}
   
   const expression = operations.join('');
