@@ -1,5 +1,7 @@
 
 import express from "express" ;
+import { create, all } from 'mathjs'
+const math = create(all,  {})
 const app = express();
 const PORT = 3000;
 
@@ -8,42 +10,43 @@ const history = [];
 app.use(express.json());
 
 function calculate(operations) {
-    let result = parseFloat(operations[0]);
-    for (let i = 1; i < operations.length; i += 2) {
-        const operator = operations[i];
-        const operand = parseFloat(operations[i + 1]);
-        switch (operator) {
-            case 'plus':
-              operations[i] = "+";
-                result += operand;
-                break;
-            case 'minus':
-              operations[i] = "-";
-                result -= operand;
-                break;
-            case 'into':
-              operations[i] = "*";
-                result *= operand;
-                break;
-            case 'over':
-              operations[i] = "/";
-                result /= operand;
-                break;
-            case 'modulo':
-              operations[i] = "%";
-            result %= operand;
+  for (let i = 1; i < operations.length; i += 2) {
+    const operator = operations[i];
+    const operand = parseFloat(operations[i + 1]);
+    switch (operator) {
+        case 'plus':
+          operations[i] = "+";
+            
             break;
-            case 'power':
-              operations[i] = "**";
-              result **=operand;
-              break;
-              case 'squareroot':
-                operations[i] = ")½";
-              result = Math.sqrt(result);
-              break;
-        }
-    }
-    return result;
+        case 'minus':
+          operations[i] = "-";
+            
+            break;
+        case 'into':
+          operations[i] = "*";
+            
+            break;
+        case 'over':
+          operations[i] = "/";
+            
+            break;
+        case 'modulo':
+          operations[i] = "%";
+        
+        break;
+        case 'power':
+          operations[i] = "**";
+          
+          break;
+         
+    }}
+  
+  const expression = operations.join('');
+
+  
+  const result = math.evaluate(expression);
+  
+  return result;
 }
 
 app.get('/history', (req, res) => {
